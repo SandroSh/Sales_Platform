@@ -5,7 +5,7 @@ interface CartCounterState {
   value: number;
   items: ItemType[] | null;
 }
-interface ItemType {
+export interface ItemType {
   product: ProductType;
   quantity: number;
 }

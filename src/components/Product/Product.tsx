@@ -14,7 +14,7 @@ const Product = ({ product }: { product: ProductType }) => {
   }
 
   return (
-    <div className="product">
+    <div className="product-main">
       <img src={product.image} alt={product.name} className="product-image" />
       <h2 className="product-name">{product.name}</h2>
       <div className='product-info'>

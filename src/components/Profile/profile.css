@@ -1,0 +1,18 @@
+.selected-items-container{
+  margin-top:200px;
+  padding: 20px;
+}
+
+
+.main-info{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.products-container{
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
