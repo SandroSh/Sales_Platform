@@ -9,7 +9,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   &:hover{
     transition: 1s;
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 }
 
@@ -47,4 +47,8 @@
 }
 .add-cart-button{
   margin-top:20px;
+}
+
+.blur-class{
+  filter:brightness(0.5);
 }
