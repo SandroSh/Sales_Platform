@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
 import { RootState } from '../../state/store';
 import Navbar from '../Navbar/Navbar';
@@ -9,6 +9,7 @@ const Profile = () => {
 
   const selectedProducts = useSelector((state: RootState) => state.cartCounter.items);
   const itemsQuantity = useSelector((state: RootState) => state.cartCounter.value);
+  const dispatch = useDispatch();
 
   return (
     <>

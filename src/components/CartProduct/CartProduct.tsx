@@ -16,7 +16,7 @@ const CartProduct = ({ item }: { item: ItemType }) => {
       </div>
       <div className='product-info' style={!product.isInSale ? { margin: '18px 0' } : {}}>
         <p>Quantity:{item.quantity}</p>
-        <p>Total:{product.price * item.quantity}$</p>
+        <p>Total:{(product.price * item.quantity).toFixed(2)}$</p>
       </div>
     </div>
   )

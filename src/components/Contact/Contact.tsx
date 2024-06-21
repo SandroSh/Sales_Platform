@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom'
 import './contact.css'
+import FacebookIcon from '../../assets/FacebookIcon.svg'
+import GmailIcon from '../../assets/GmailIcon.svg'
+
+
 const Contact = () => {
   return (
     <div className="contact-container">
@@ -31,8 +35,21 @@ const Contact = () => {
       <Link to='/'>
       <button type="submit">Submit</button>
       </Link>
+    
     </form>
+
+    <div style={{margin:'5px 0'}}>
+      <h3 style={{margin:'10px 0'}}>Subscribe newsletter</h3>
+      <input type="text" placeholder='enter your mail' />
+      <div style={{display:'flex', alignItems:'center', justifyContent:'space-around', marginTop:'20px'}}>
+        <button style={{width:'40%'}}>Subscribe</button>
+        <img src={FacebookIcon} alt="facebook icon"style={{width:'40px'}} />
+        <img src={GmailIcon} alt="gmail icon" style={{width:'40px'}}/>
+      </div>
+    </div>
+
   </div>
+
   )
 }
 

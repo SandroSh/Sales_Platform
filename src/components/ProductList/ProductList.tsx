@@ -9,13 +9,14 @@ const ProductsList = () => {
   const [searchInput, setSearchInput] = useState<string>();
   const [priceRange, setPriceRange] = useState<string>();
   const [inSale, setInSale] = useState<string>();
+  const [typeOfSort, setTypeOfSort] = useState<string>();
 
   // Searching Product
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchInput(e.target.value);
     if (e.target.value) {
-      if (priceRange || inSale) {
+      if (priceRange || inSale || typeOfSort) {
         setData(data.filter((product) => product.name.toLowerCase().includes(e.target.value.toLowerCase())));
       } else {
         setData(products.filter((product) => product.name.toLowerCase().includes(e.target.value.toLowerCase())));
@@ -35,11 +36,41 @@ const ProductsList = () => {
     setPriceRange(e.target.value);
     const [min, max] = e.target.value.split('-').map(Number);
 
-    if (searchInput || inSale) {
+    if (searchInput || inSale || typeOfSort) {
       setData(data.filter(product => product.price >= min && (max ? product.price <= max : true)));
     } else {
       setData(products.filter(product => product.price >= min && (max ? product.price <= max : true)));
     }
+  }
+
+  // sort items
+  const handleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (!e.target.value) {
+      setData(products);
+      return;
+    }
+    let newArr = [];
+    setTypeOfSort(e.target.value);
+
+    if (searchInput || inSale || priceRange) {
+      newArr = [...data];
+    } else {
+      newArr = [...products];
+    }
+
+    if (e.target.value === 'alphabetically-asc') {
+      newArr.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (e.target.value === 'alphabetically-desc') {
+      newArr.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (e.target.value === 'price-asc') {
+      newArr.sort((a, b) => a.price - b.price);
+    } else if (e.target.value === 'price-desc') {
+      newArr.sort((a, b) => b.price - a.price);
+    } else {
+      newArr = [...products];
+    }
+
+    setData(newArr);
   }
 
 
@@ -54,12 +85,14 @@ const ProductsList = () => {
 
     const isInSale = e.target.value.split(' ')[0] === 'true' ? true : false;
 
-    if (searchInput || priceRange) {
+    if (searchInput || priceRange || typeOfSort) {
       setData(() => data.filter(product => product.isInSale === isInSale && product.inStock === true))
     } else {
       setData(() => products.filter(product => product.isInSale === isInSale && product.inStock === true))
     }
   }
+
+
 
   return (
     <div>
@@ -77,6 +110,15 @@ const ProductsList = () => {
             <option value="300-500">$300 to $500</option>
             <option value="500-1000">$500 to $1000</option>
             <option value="1000-">Above $1000</option>
+          </select>
+        </div>
+        <div>
+          <select id="isInsSaleFilter" value={typeOfSort} onChange={(e) => handleSortChange(e)}>
+            <option value="">Sort Products</option>
+            <option value="alphabetically-asc">Alphabetically Ascending</option>
+            <option value="alphabetically-desc">Alphabetically Descending</option>
+            <option value="price-asc">Price Ascending</option>
+            <option value="price-desc">Price Descending</option>
           </select>
         </div>
         <div>
